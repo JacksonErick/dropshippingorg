@@ -2,9 +2,17 @@
 require_once 'init.php';
 
 // Get course details from URL or session
-$courseLevel = $_GET['level'] ?? 1;
-$coursePrice = $_GET['price'] ?? 0;
-$courseDescription = "Dropshipping Course Level $courseLevel Enrollment";
+$type = $_GET['type'] ?? '';
+$courseLevel = $_GET['level'] ?? null;
+$coursePrice = $_GET['price'] ?? null;
+$courseDescription = '';
+
+if ($type === 'tea') {
+    $courseDescription = "Buy me a tea";
+    $coursePrice = null; // Allow custom amount
+} else {
+    $courseDescription = "Dropshipping Course Level $courseLevel Enrollment";
+}
 
 // Store in session
 $_SESSION['current_order'] = [
@@ -60,8 +68,16 @@ $_SESSION['current_order'] = [
 <body>
     <div class="payment-container">
         <h1>Complete Payment via Mobile Money</h1>
-        <p>Course: Level <?php echo htmlspecialchars($courseLevel); ?></p>
-        <p>Amount: <?php echo number_format($coursePrice); ?> TZS</p>
+        <?php if ($type === 'tea'): ?>
+            <p>Buy me a tea ☕️</p>
+            <div class="form-group">
+                <label for="amount">Amount (TZS)</label>
+                <input type="number" id="amount" name="amount" min="1000" required>
+            </div>
+        <?php else: ?>
+            <p>Course: Level <?php echo htmlspecialchars($courseLevel); ?></p>
+            <p>Amount: <?php echo number_format($coursePrice); ?> TZS</p>
+        <?php endif; ?>
         
         <form action="process-payment.php" method="POST">
             <div class="form-group">
