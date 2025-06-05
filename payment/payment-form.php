@@ -1,17 +1,42 @@
 <?php
 require_once 'init.php';
 
-// Get course details from URL or session
-$type = $_GET['type'] ?? '';
-$courseLevel = $_GET['level'] ?? null;
-$coursePrice = $_GET['price'] ?? null;
+// Get course details and type from URL
+$type = $_GET['type'] ?? 'course';
+$course = $_GET['course'] ?? '';
+$level = $_GET['level'] ?? '';
+
+// Set course price based on type and level
 $courseDescription = '';
+$coursePrice = 0;
 
 if ($type === 'tea') {
     $courseDescription = "Buy me a tea";
-    $coursePrice = null; // Allow custom amount
+    $coursePrice = null;
+} elseif ($course === 'dropshipping') {
+    switch ($level) {
+        case '1':
+            $coursePrice = 35000;
+            $courseDescription = "Dropshipping Course - Level 1: Beginner Fundamentals";
+            break;
+        case '2':
+            $coursePrice = 45000;
+            $courseDescription = "Dropshipping Course - Level 2: Intermediate Growth";
+            break;
+        case '3':
+            $coursePrice = 55000;
+            $courseDescription = "Dropshipping Course - Level 3: Advanced Scaling";
+            break;
+    }
+} elseif ($course === 'forex') {
+    $coursePrice = 150000;
+    $courseDescription = "Forex Trading Pro Course";
+} elseif ($course === 'crypto') {
+    $coursePrice = 150000;
+    $courseDescription = "Cryptocurrency & Blockchain Course";
 } else {
-    $courseDescription = "Dropshipping Course Level $courseLevel Enrollment";
+    header('Location: /');
+    exit;
 }
 
 // Store in session
@@ -19,7 +44,8 @@ $_SESSION['current_order'] = [
     'order_id' => uniqid('ORDER-'),
     'amount' => $coursePrice,
     'description' => $courseDescription,
-    'course_level' => $courseLevel
+    'course' => $course,
+    'level' => $level
 ];
 ?>
 
@@ -69,14 +95,18 @@ $_SESSION['current_order'] = [
     <div class="payment-container">
         <h1>Complete Payment via Mobile Money</h1>
         <?php if ($type === 'tea'): ?>
-            <p>Buy me a tea ☕️</p>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 1rem;">Buy me a tea ☕️</p>
             <div class="form-group">
                 <label for="amount">Amount (TZS)</label>
                 <input type="number" id="amount" name="amount" min="1000" required>
             </div>
         <?php else: ?>
-            <p>Course: Level <?php echo htmlspecialchars($courseLevel); ?></p>
-            <p>Amount: <?php echo number_format($coursePrice); ?> TZS</p>
+            <div style="margin-bottom: 1.5rem; text-align: center;">
+                <p style="font-size: 1.2rem; margin-bottom: 0.5rem;"><?php echo htmlspecialchars($courseDescription); ?></p>
+                <p style="font-size: 1.5rem; font-weight: bold; color: #7E001F;">
+                    <?php echo number_format($coursePrice); ?> TZS
+                </p>
+            </div>
         <?php endif; ?>
         
         <form action="process-payment.php" method="POST">
@@ -95,8 +125,11 @@ $_SESSION['current_order'] = [
                 <small>Format: 07XXXXXXXX (e.g., 0744963858)</small>
             </div>
             <input type="hidden" name="order_id" value="<?php echo $_SESSION['current_order']['order_id']; ?>">
-            <input type="hidden" name="amount" value="<?php echo $coursePrice; ?>">
-            <input type="hidden" name="course_level" value="<?php echo $courseLevel; ?>">
+            <?php if (!$type === 'tea'): ?>
+                <input type="hidden" name="amount" value="<?php echo $coursePrice; ?>">
+            <?php endif; ?>
+            <input type="hidden" name="course" value="<?php echo $course; ?>">
+            <input type="hidden" name="level" value="<?php echo $level; ?>">
             <button type="submit">Pay with Mobile Money</button>
         </form>
     </div>
