@@ -162,15 +162,89 @@ require_once 'payment/init.php';
             color: var(--text-secondary);
         }
 
-[Previous CSS styles remain unchanged...]
+        .course-card {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            margin-bottom: 2rem;
+        }
 
-[Previous HTML content remains unchanged...]
+        .btn {
+            display: inline-block;
+            background: var(--accent-primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            margin: 0.5rem 0;
+        }
 
-[Previous JavaScript content remains unchanged...]
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Social Media Floating Icons */
+        .social-float {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .social-icon.whatsapp { background: #25D366; }
+        .social-icon.youtube { background: #FF0000; }
+        .social-icon.telegram { background: #0088cc; }
+        .social-icon.instagram { background: #E4405F; }
 
     </style>
 </head>
 <body>
+    <!-- Social Media Floating Icons -->
+    <div class="social-float" id="socialFloat">
+        <a href="https://wa.me/255675979428" target="_blank" class="social-icon whatsapp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://www.youtube.com/@binaryjackk" target="_blank" class="social-icon youtube">
+            <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://t.me/+9lwPyC0gKmUzMTQ8" target="_blank" class="social-icon telegram">
+            <i class="fab fa-telegram"></i>
+        </a>
+        <a href="https://www.instagram.com/binary.jackk?igsh=azBxaXlyOWtpMWo3" target="_blank" class="social-icon instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+    </div>
+
                 <h2 class="course-title">Dropshipping Mastery</h2>
                 <p class="course-description">Learn how to build and scale a successful dropshipping business from scratch.</p>
                 <div class="course-levels">
@@ -194,5 +268,18 @@ require_once 'payment/init.php';
                 <a href="payment/payment-form.php?course=crypto" class="btn">Pre-Order Now</a>
             </div>
         </div>
+
+    <script>
+        // Tea Cup and Social Icons Toggle
+        const teaCup = document.querySelector('.tea-cup');
+        const socialFloat = document.getElementById('socialFloat');
+        
+        teaCup.addEventListener('click', () => {
+            socialFloat.style.display = socialFloat.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Theme Toggle
+        const themeToggle = document.querySelector('.theme-toggle');
+    </script>
 </body>
 </html>

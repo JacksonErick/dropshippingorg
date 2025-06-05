@@ -56,30 +56,62 @@ $_SESSION['current_order'] = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mobile Money Payment - Kuzamarket</title>
     <style>
+        body {
+            background: #000000;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+        }
+
         .payment-container {
             max-width: 600px;
-            margin: 2rem auto;
+            margin: 2rem;
+            width: 90%;
             padding: 2rem;
-            background: white;
+            background: rgba(17, 17, 17, 0.95);
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.2);
+            backdrop-filter: blur(10px);
         }
+
+        h1 {
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+
         .form-group {
             margin-bottom: 1rem;
         }
+
         label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: bold;
+            color: #cccccc;
         }
+
         input, select {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid #333;
             border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
         }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
         button {
-            background-color: #7E001F;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
             color: white;
             padding: 12px 20px;
             border: none;
@@ -88,6 +120,12 @@ $_SESSION['current_order'] = [
             font-size: 16px;
             width: 100%;
             margin-top: 1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
         }
     </style>
 </head>
