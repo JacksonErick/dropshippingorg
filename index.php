@@ -171,6 +171,28 @@ require_once 'payment/init.php';
     </style>
 </head>
 <body>
-[Previous body content remains unchanged...]
+                <h2 class="course-title">Dropshipping Mastery</h2>
+                <p class="course-description">Learn how to build and scale a successful dropshipping business from scratch.</p>
+                <div class="course-levels">
+                    <a href="payment/payment-form.php?course=dropshipping&level=1" class="btn">Level 1 - 35,000 TZS</a>
+                    <a href="payment/payment-form.php?course=dropshipping&level=2" class="btn" style="margin-top: 0.5rem;">Level 2 - 45,000 TZS</a>
+                    <a href="payment/payment-form.php?course=dropshipping&level=3" class="btn" style="margin-top: 0.5rem;">Level 3 - 55,000 TZS</a>
+                </div>
+            </div>
+        </div>
+
+                <h2 class="course-title">Forex Trading Pro</h2>
+                <p class="course-description">Master forex trading strategies and technical analysis.</p>
+                <div class="course-price">150,000 TZS</div>
+                <a href="payment/payment-form.php?course=forex" class="btn">Pre-Order Now</a>
+            </div>
+        </div>
+
+                <h2 class="course-title">Cryptocurrency & Blockchain</h2>
+                <p class="course-description">Understand blockchain technology and crypto trading fundamentals.</p>
+                <div class="course-price">150,000 TZS</div>
+                <a href="payment/payment-form.php?course=crypto" class="btn">Pre-Order Now</a>
+            </div>
+        </div>
 </body>
 </html>
