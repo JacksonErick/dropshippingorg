@@ -444,8 +444,7 @@ require_once 'payment/init.php';
             <div class="course-content">
                 <h2 class="course-title">Dropshipping Mastery</h2>
                 <p class="course-description">Learn how to build and scale a successful dropshipping business from scratch.</p>
-                <div class="course-price">35,000 TZS</div>
-                <button class="btn enroll-btn" data-level="1" data-price="35000">Enroll Now</button>
+                <button class="btn" onclick="openDropshippingModal()">Choose Level</button>
             </div>
         </div>
 
@@ -555,6 +554,40 @@ require_once 'payment/init.php';
                 </div>
             </div>
             <button class="btn enroll-btn" data-level="crypto" data-price="150000">Pre-Order Now - 150,000 TZS</button>
+        </div>
+    </div>
+
+    <!-- Dropshipping Modal -->
+    <div id="dropshippingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeDropshippingModal()">&times;</span>
+            <h2>Choose Your Dropshipping Course Level</h2>
+            <div class="curriculum-list">
+                <div class="course-card" style="margin-bottom: 1rem;">
+                    <div class="course-content">
+                        <h3>Level 1: Beginner Fundamentals</h3>
+                        <p>Perfect for beginners starting their dropshipping journey.</p>
+                        <div class="course-price">35,000 TZS</div>
+                        <button class="btn enroll-btn" data-level="1" data-price="35000">Enroll Now</button>
+                    </div>
+                </div>
+                <div class="course-card" style="margin-bottom: 1rem;">
+                    <div class="course-content">
+                        <h3>Level 2: Intermediate Growth</h3>
+                        <p>For those ready to scale their dropshipping business.</p>
+                        <div class="course-price">45,000 TZS</div>
+                        <button class="btn enroll-btn" data-level="2" data-price="45000">Enroll Now</button>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-content">
+                        <h3>Level 3: Advanced Scaling</h3>
+                        <p>Master advanced strategies and automation.</p>
+                        <div class="course-price">55,000 TZS</div>
+                        <button class="btn enroll-btn" data-level="3" data-price="55000">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -689,6 +722,14 @@ require_once 'payment/init.php';
         function closeCryptoModal() {
             document.getElementById('cryptoModal').style.display = 'none';
         }
+        
+        function openDropshippingModal() {
+            document.getElementById('dropshippingModal').style.display = 'block';
+        }
+        
+        function closeDropshippingModal() {
+            document.getElementById('dropshippingModal').style.display = 'none';
+        }
 
         // FAQ Accordion
         document.querySelectorAll('.faq-question').forEach(question => {
@@ -727,6 +768,9 @@ require_once 'payment/init.php';
                     
                     const level = this.getAttribute("data-level");
                     const price = this.getAttribute("data-price");
+                    
+                    // Close the dropshipping modal if it's open
+                    closeDropshippingModal();
                     
                     // Update form fields
                     document.getElementById("courseLevelDisplay").textContent = `Level ${level}`;
